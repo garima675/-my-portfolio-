@@ -448,6 +448,10 @@ footer {
   width: 100%;
 }
 
+a {
+  color: white;
+}
+
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
   #contact-page {
