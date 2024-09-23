@@ -486,10 +486,20 @@ footer {
   width: 100%;
 }
 
-a {
+footer a {
   color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 16px;
 }
 
+footer a:hover {
+  color: #0077b5;
+}
+
+footer i {
+  margin-right: 5px;
+}
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
   #contact-page {
