@@ -1,3 +1,70 @@
+const toolItems = document.querySelectorAll(".tool-category");
+const observerTools = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in-view");
+        observerTools.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.1 }
+);
+
+toolItems.forEach((item) => observerTools.observe(item));
+
+document.addEventListener("DOMContentLoaded", () => {
+  const typewriterBlocks = document.querySelectorAll(".type-line");
+  let lineIndex = 0;
+
+  function typeLine(lineEl, text, speed = 20, callback) {
+    let i = 0;
+    const interval = setInterval(() => {
+      lineEl.textContent += text.charAt(i);
+      i++;
+      if (i >= text.length) {
+        clearInterval(interval);
+        if (callback) setTimeout(callback, 200);
+      }
+    }, speed);
+  }
+
+  function typeNextLine() {
+    if (lineIndex >= typewriterBlocks.length) return;
+
+    const currentLine = typewriterBlocks[lineIndex];
+    const text = currentLine.getAttribute("data-text");
+    typeLine(currentLine, text, 15, () => {
+      lineIndex++;
+      typeNextLine();
+    });
+  }
+
+  typeNextLine();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const skillItems = document.querySelectorAll(".skill-item");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target); // Animate only once
+        }
+      });
+    },
+    {
+      threshold: 0.1, // Trigger when 10% of item is visible
+    }
+  );
+
+  skillItems.forEach((item) => {
+    observer.observe(item);
+  });
+});
+
 // Function to load HTML content into specified element
 function loadHTML(filename, elementId) {
   fetch(filename)
